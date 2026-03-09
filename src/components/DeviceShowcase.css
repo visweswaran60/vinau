@@ -1,0 +1,549 @@
+.device-showcase-wrapper {
+    height: 350vh;
+    position: relative;
+    background-color: var(--bg-color);
+    background-image:
+        radial-gradient(circle at center, var(--surface-color) 0%, transparent 70%),
+        linear-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+}
+
+.sticky-container {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+    /* overflow removed so feature tags can extend outside laptop bounds */
+}
+
+.scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.scene::before {
+    content: '';
+    position: absolute;
+    bottom: 5%;
+    width: 80%;
+    height: 200px;
+    background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+    transform: rotateX(80deg);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Floating Texts */
+.showcase-text {
+    position: absolute;
+    top: 35%;
+    max-width: 350px;
+    z-index: 20;
+}
+
+.showcase-text h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.showcase-text p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.left-text {
+    left: 10%;
+}
+
+.right-text {
+    right: 10%;
+    text-align: right;
+}
+
+/* ------ LAPTOP 3D ------ */
+.laptop-wrapper {
+    position: absolute;
+    width: 800px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-style: preserve-3d;
+    z-index: 10;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.laptop-lid {
+    width: 100%;
+    height: 500px;
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+    border-radius: 24px 24px 4px 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    position: relative;
+    box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, 0.5),
+        -10px 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    transform-style: preserve-3d;
+}
+
+.laptop-screen {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+    border: 1px solid #111;
+}
+
+.laptop-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.screen-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            rgba(16, 185, 129, 0.05) 50%,
+            transparent 100%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 5;
+    animation: scanline 8s linear infinite;
+}
+
+.screen-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+    animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.laptop-logo {
+    position: absolute;
+    bottom: -15px;
+    font-size: 0.6rem;
+    color: #666;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.laptop-base {
+    width: 105%;
+    height: 100px;
+    background: linear-gradient(to bottom, #d1d1d1 0%, #a3a3a3 100%);
+    border-radius: 4px 4px 20px 20px;
+    position: relative;
+    transform: perspective(1000px) rotateX(65deg);
+    transform-origin: top;
+    display: flex;
+    justify-content: center;
+    box-shadow:
+        inset 0 4px 6px rgba(255, 255, 255, 0.8),
+        0 40px 100px rgba(0, 0, 0, 0.4),
+        0 10px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid #999;
+}
+
+.laptop-keyboard {
+    width: 90%;
+    height: 70px;
+    background: rgba(20, 20, 20, 0.95);
+    border-radius: 6px;
+    margin: 10px auto 0;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    box-shadow:
+        inset 0 2px 10px rgba(0, 0, 0, 0.8),
+        0 0 15px rgba(16, 185, 129, 0.1);
+    border: 1px solid #111;
+}
+
+.keyboard-row {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+}
+
+.key {
+    flex: 1;
+    height: 6px;
+    background: #333;
+    border-radius: 1px;
+    box-shadow:
+        inset 0 -1px 1px rgba(0, 0, 0, 0.5),
+        0 1px 1px rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid #000;
+}
+
+.key.fn {
+    height: 4px;
+}
+
+.key.backspace {
+    flex: 2;
+}
+
+.key.tab {
+    flex: 1.5;
+}
+
+.key.caps {
+    flex: 1.8;
+}
+
+.key.enter {
+    flex: 2.2;
+}
+
+.key.shift {
+    flex: 2.4;
+}
+
+.key.shift-right {
+    flex: 2.8;
+}
+
+.key.space {
+    flex: 6;
+    background: #3a3a3a;
+}
+
+.key.cmd,
+.key.opt,
+.key.ctrl {
+    flex: 1.2;
+}
+
+.key.arrows {
+    flex: 2;
+    background: linear-gradient(90deg, #333 45%, transparent 45.1%, transparent 54.9%, #333 55%);
+    background-size: 100% 100%;
+}
+
+.laptop-trackpad {
+    position: absolute;
+    bottom: 15px;
+    width: 120px;
+    height: 45px;
+    background: linear-gradient(to bottom, #b8b8b8, #999);
+    border-radius: 6px;
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.3),
+        0 1px 1px rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* ------ PHONE 3D ------ */
+.phone-wrapper {
+    position: absolute;
+    z-index: 15;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.3));
+}
+
+.phone {
+    width: 300px;
+    height: 600px;
+    background: #1a1a1a;
+    border-radius: 40px;
+    border: 8px solid #2d2d2d;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 2px #444;
+}
+
+.phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 25px;
+    background: #2d2d2d;
+    border-radius: 0 0 15px 15px;
+    z-index: 2;
+}
+
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+.phone-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* ------ INTERACTIVE BITS ------ */
+.hotspot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 500;
+    box-shadow: 0 0 0 rgba(16, 185, 129, 0.4);
+    animation: hotPulse 2s infinite;
+}
+
+.hotspot::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    border-radius: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    border: 1px solid var(--primary-color);
+}
+
+.hotspot:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Specific tooltip position for screen to avoid clipping */
+.screen-hotspot::after {
+    bottom: auto;
+    top: calc(100% + 10px);
+    transform: translateX(-50%) translateY(-10px);
+}
+
+.screen-hotspot:hover::after {
+    transform: translateX(-50%) translateY(0);
+}
+
+.screen-hotspot {
+    top: 20%;
+    right: 20%;
+}
+
+.trackpad-hotspot {
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.phone-hotspot {
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes hotPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* Feature Tags */
+.feature-tags-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    overflow: visible;
+}
+
+.feature-tag {
+    position: absolute;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: floatTag 4s ease-in-out infinite;
+}
+
+@keyframes floatTag {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Laptop Tags positions */
+.feature-tag.t1 {
+    top: -60px;
+    left: -160px;
+    animation-delay: 0s;
+}
+
+.feature-tag.t2 {
+    top: 100px;
+    right: -200px;
+    animation-delay: 1s;
+}
+
+.feature-tag.t3 {
+    bottom: 120px;
+    left: -220px;
+    animation-delay: 2s;
+}
+
+.feature-tag.t4 {
+    bottom: 40px;
+    right: -280px;
+    animation-delay: 3.5s;
+}
+
+/* Phone Tags positions */
+.feature-tag.m1 {
+    top: 50px;
+    left: -160px;
+    animation-delay: 0.5s;
+}
+
+.feature-tag.m2 {
+    top: 250px;
+    right: -180px;
+    animation-delay: 1.5s;
+}
+
+.feature-tag.m3 {
+    bottom: 150px;
+    left: -140px;
+    animation-delay: 2.5s;
+}
+
+.feature-tag.m4 {
+    bottom: 0;
+    right: -120px;
+    animation-delay: 3s;
+}
+
+@media (max-width: 1024px) {
+    .feature-tag {
+        display: none;
+    }
+}
+
+/* Responsive constraints */
+@media (max-width: 1024px) {
+    .laptop-wrapper {
+        width: 600px;
+    }
+
+    .laptop-lid {
+        height: 380px;
+    }
+
+    .showcase-text {
+        position: relative;
+        text-align: center;
+        top: 10%;
+        left: 0 !important;
+        right: 0 !important;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .laptop-wrapper {
+        width: 100%;
+        padding: 0 1rem;
+    }
+
+    .laptop-lid {
+        height: 250px;
+    }
+
+    .phone {
+        width: 250px;
+        height: 500px;
+    }
+}
